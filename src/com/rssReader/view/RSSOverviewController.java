@@ -1,6 +1,6 @@
 package com.rssReader.view;
 
-import com.rssReader.RssReader;
+import com.rssReader.MainApp;
 import com.rssReader.model.RSSItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,7 +21,7 @@ public class RSSOverviewController {
 	private TextArea textArea;
 
 	// Reference to the main application.
-	private RssReader mainApp;
+	private MainApp mainApp;
 
 	/**
 	 * The constructor is called before initialize() method.
@@ -48,7 +48,7 @@ public class RSSOverviewController {
 	 *
 	 * @param mainApp
 	 */
-	public void setMainApp(RssReader mainApp) {
+	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
 		rssTable.setItems(mainApp.getRssItemData());

@@ -13,14 +13,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RssReader extends Application {
+public class MainApp extends Application {
 
 	private Stage      primaryStage;
 	private BorderPane rootLayout;
 
 	private ObservableList<RSSItem> rssItemData = FXCollections.observableArrayList();
 
-	public RssReader() {
+	public MainApp() {
 		rssItemData.add(new RSSItem("Урок J-13. Арифметические операторы и математика в Java.\n", "Sat, 06 Sep 2014 20:51:15", "В уроке 8 мы затронули логические операторы, они нам были необходимы для формирования логического выражения в условиях if. Этот урок будет посвящен математике в Java, и поэтому мы рассмотрим подробнее арифметические операторы и  частично возможности класса Math. Но для начала, выясним, что же такое операторы. Операторы это специальные символы, отвечающие за ту или иную операцию, например сложение, "));
 		rssItemData.add(new RSSItem("Урок J-12", "rssData", "rssText"));
 		rssItemData.add(new RSSItem("Урок J-11", "rssData", "rssText"));
@@ -58,7 +58,7 @@ public class RssReader extends Application {
 	private void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(RssReader.class.getResource("view/RootLayout.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
 			// Show the scene containing the root layout.
@@ -75,7 +75,7 @@ public class RssReader extends Application {
 		try {
 			// Load person overview
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(RssReader.class.getResource("view/RSSOverview.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/RSSOverview.fxml"));
 			AnchorPane personOverview = (AnchorPane) loader.load();
 
 			// Set person overview into the center of root layout.
