@@ -36,6 +36,8 @@ public class RSSOverviewController {
 	@FXML
 	private void initialize() {
 		textArea.setWrapText(true);
+		textArea.setEditable(false);
+
 		titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
 
 		showRSSItemDetail(null);
@@ -73,7 +75,7 @@ public class RSSOverviewController {
 	}
 
 	@FXML
-	private void handleDeletePerson() {
+	private void handleDeleteRSSItem() {
 		int selectedIndex = rssTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			rssTable.getItems().remove(selectedIndex);
@@ -88,10 +90,8 @@ public class RSSOverviewController {
 	}
 
 	@FXML
-	private void handleNewPerson() {
-	}
+	private void handleNewRSSItem() {}
 
 	@FXML
-	private void handleEditPerson() {
-	}
+	private void handleEditRSSItem() {}
 }

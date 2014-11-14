@@ -10,10 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class MainApp extends Application {
+
+	private static Logger log = LoggerFactory.getLogger(MainApp.class);
 
 	private Stage      primaryStage;
 	private BorderPane rootLayout;
