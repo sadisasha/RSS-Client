@@ -57,10 +57,10 @@ public class RSSOverviewController {
 	}
 
 	/**
-	 * Fills all text fields to show details about the person.
-	 * If the specified person is null, all text fields are cleared.
+	 * Fills all text fields to show details about the rssItem.
+	 * If the specified rssItem is null, all text fields are cleared.
 	 *
-	 * @param rssItem the person or null
+	 * @param rssItem the rssItem or null
 	 */
 	private void showRSSItemDetail(RSSItem rssItem) {
 		if (rssItem != null) {
@@ -82,8 +82,8 @@ public class RSSOverviewController {
 		} else {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("No Selection");
-			alert.setHeaderText("No person selected");
-			alert.setContentText("Please select a person in the table.");
+			alert.setHeaderText("No RSSItem selected");
+			alert.setContentText("Please select a rssItem in the table.");
 			alert.showAndWait();
 		}
 

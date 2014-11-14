@@ -53,7 +53,7 @@ public class MainApp extends Application {
 
 		initRootLayout();
 
-		showPersonOverview();
+		showRSSOverview();
 	}
 
 	/**
@@ -75,15 +75,15 @@ public class MainApp extends Application {
 		}
 	}
 
-	private void showPersonOverview() {
+	private void showRSSOverview() {
 		try {
-			// Load person overview
+			// Load main window
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/RSSOverview.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
+			AnchorPane mainWindow = (AnchorPane) loader.load();
 
-			// Set person overview into the center of root layout.
-			rootLayout.setCenter(personOverview);
+			// Set main window into the center of root layout.
+			rootLayout.setCenter(mainWindow);
 
 			// Give the controller access to the main app
 			RSSOverviewController controller = loader.getController();
