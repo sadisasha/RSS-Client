@@ -1,5 +1,7 @@
 package com.rssReader.util;
 
+import com.rssReader.model.RSSItem;
+import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,7 @@ public class RSSXMLRequest {
 		this.xmlFile = "";
 	}
 
-	public String getXMLFile() {
+	public ObservableList<RSSItem> getXMLFile() {
 		try {
 			URL url = new URL(uri);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -37,21 +39,24 @@ public class RSSXMLRequest {
 
 			InputStream xmlFileStream = connection.getInputStream();
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(xmlFileStream));
+			RSSParser rssParser = new RSSParser(xmlFileStream);
+			ObservableList<RSSItem> rssItems = rssParser.getRssItems();
+
+			/*BufferedReader reader = new BufferedReader(new InputStreamReader(xmlFileStream));
 			StringBuilder out = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				out.append(line);
 			}
 
-			xmlFile = out.toString();
+			xmlFile = out.toString();*/
 			log.info("XML-file load is complete");
+			return rssItems;
 		} catch (IOException e) {
 			e.getStackTrace();
 			log.info("Error getting xmlFile");
 		}
-
-		return xmlFile;
+       return null;
 	}
 
 }

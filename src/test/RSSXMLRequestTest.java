@@ -18,7 +18,7 @@ public class RSSXMLRequestTest {
 	@Test
 	public void xmlFileIsNotEmpty() throws Exception {
 		String excepted = "";
-		excepted = xmlRequest.getXMLFile();
+		//excepted = xmlRequest.getXMLFile();
 		assertNotEquals(excepted, "");
 	}
 

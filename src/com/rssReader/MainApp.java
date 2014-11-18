@@ -1,6 +1,8 @@
 package com.rssReader;
 
 import com.rssReader.model.RSSItem;
+import com.rssReader.util.RSSParser;
+import com.rssReader.util.RSSXMLRequest;
 import com.rssReader.view.RSSOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -25,16 +27,10 @@ public class MainApp extends Application {
 	private ObservableList<RSSItem> rssItemData = FXCollections.observableArrayList();
 
 	public MainApp() {
-		rssItemData.add(new RSSItem("Урок J-13. Арифметические операторы и математика в Java.\n", "Sat, 06 Sep 2014 20:51:15", "В уроке 8 мы затронули логические операторы, они нам были необходимы для формирования логического выражения в условиях if. Этот урок будет посвящен математике в Java, и поэтому мы рассмотрим подробнее арифметические операторы и  частично возможности класса Math. Но для начала, выясним, что же такое операторы. Операторы это специальные символы, отвечающие за ту или иную операцию, например сложение, "));
-		rssItemData.add(new RSSItem("Урок J-12", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-11", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-10", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-9", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-8", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-7", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-6", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-5", "rssData", "rssText"));
-		rssItemData.add(new RSSItem("Урок J-4", "rssData", "rssText"));
+
+		RSSXMLRequest rssxmlRequest = new RSSXMLRequest("http://study-java.ru/feed/");
+		rssItemData = rssxmlRequest.getXMLFile();
+
 	}
 
 	public ObservableList<RSSItem> getRssItemData() {

@@ -1,5 +1,8 @@
 package com.rssReader.util;
 
+import com.rssReader.model.RSSItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -13,6 +16,8 @@ import java.io.InputStream;
  */
 public class RSSParser {
 
+	private ObservableList<RSSItem> rssItems = FXCollections.observableArrayList();
+
 	public RSSParser(InputStream input) {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
@@ -20,12 +25,20 @@ public class RSSParser {
 			InputStream xmlInput = input;
 			SAXParser saxParser = factory.newSAXParser();
 
-			DefaultHandler handler = new SaxHandler();
+			SaxHandler handler = new SaxHandler();
 			saxParser.parse(xmlInput, handler);
-
+ 			setRssItems(handler.getRssItems());
 		} catch (Throwable err) {
 			err.printStackTrace();
 		}
+	}
+
+	public void setRssItems(ObservableList<RSSItem> rssItems) {
+		this.rssItems = rssItems;
+	}
+
+	public ObservableList<RSSItem> getRssItems() {
+		return rssItems;
 	}
 }
 
@@ -35,6 +48,11 @@ class SaxHandler extends DefaultHandler {
 	private boolean getTitle = false;
 	private boolean getDate  = false;
 	private boolean getText  = false;
+
+	String title, date, text;
+
+	public ObservableList<RSSItem> rssItems = FXCollections.observableArrayList();
+
 
 	public void startDocument() throws SAXException {
 		//System.out.println("start document   : ");
@@ -64,7 +82,7 @@ class SaxHandler extends DefaultHandler {
 	public void characters(char ch[], int start, int length) throws SAXException {
 
 		if (getTitle) {
-			String title = new String(ch, start, length);
+			title = new String(ch, start, length);
 			if (!"Java для начинающих".equals(title)) {
 				System.out.println("Title : " + title);
 			}
@@ -72,20 +90,20 @@ class SaxHandler extends DefaultHandler {
 		}
 
 		if (getDate) {
-			String date = new String(ch, start, length);
+			date = new String(ch, start, length);
 			System.out.println("Date : " + date);
 
 			getDate = false;
 		}
 
 		if (getText) {
-			String text = new String(ch, start, length);
+			text = new String(ch, start, length);
 
 			if (!"Изучаем java программирование".equals(text)) {
-				System.out.println("Text : " + new String(ch, start, length));
+				System.out.println("Text : " + text);
 			}
-
-			getText = false;
+			rssItems.add(new RSSItem(title, date, text));
+     		getText = false;
 		}
 
 		//System.out.println("start characters : " +
@@ -95,4 +113,10 @@ class SaxHandler extends DefaultHandler {
 	public void ignorableWhitespace(char ch[], int start, int length) throws SAXException {
 	}
 
+	public ObservableList<RSSItem> getRssItems() {
+		return rssItems;
+	}
 }
+
+
+
